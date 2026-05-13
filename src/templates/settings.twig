@@ -9,7 +9,7 @@
 
 {{ forms.autosuggestField({
     first: true,
-    label: "Google OAuth ID",
+    label: "Google OAuth ID"|t('app'),
     name: 'clientID',
     required: true,
     suggestEnvVars: true,
@@ -18,7 +18,7 @@
 
 {{ forms.autosuggestField({
     first: true,
-    label: "Google OAuth Secret",
+    label: "Google OAuth Secret"|t('app'),
     name: 'clientSecret',
     required: true,
     suggestEnvVars: true,

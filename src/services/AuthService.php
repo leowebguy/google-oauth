@@ -31,7 +31,6 @@ class AuthService extends Component
     public function url(): string
     {
         $client = self::googleClient();
-
         return $client->createAuthUrl();
     }
 
