@@ -1,0 +1,59 @@
+{
+  "name": "leowebguy/google-oauth",
+  "description": "A minimal Craft plugin to provide Google OAuth login",
+  "keywords": [
+    "craftcms",
+    "google",
+    "oauth",
+    "auth",
+    "sso",
+    "login",
+    "authentication"
+  ],
+  "version": "1.0",
+  "type": "craft-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Leo",
+      "homepage": "https://github.com/leowebguy"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.1",
+    "craftcms/cms": "^4.15",
+    "google/apiclient": "^2.19"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "leowebguy\\googleoauth\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Google OAuth",
+    "handle": "google-oauth",
+    "class": "leowebguy\\googleoauth\\Plugin"
+  },
+  "config": {
+    "platform": {
+      "php": "8.1"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  },
+  "scripts": {
+    "check-cs": "vendor/bin/ecs check src --ansi",
+    "fix-cs": "vendor/bin/ecs check src --ansi --fix",
+    "phpstan": "vendor/bin/phpstan analyse src",
+    "rector": "vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-40.php"
+  }
+}

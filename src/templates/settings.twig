@@ -1,0 +1,33 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.lightswitchField({
+    first: true,
+    name: 'active',
+    label: 'OAuth ON/OFF',
+    on: settings.active,
+}) }}
+
+{{ forms.lightswitchField({
+    first: true,
+    name: 'disableLogin',
+    label: 'Disable User/Password Login',
+    on: settings.disableLogin,
+}) }}
+
+{{ forms.autosuggestField({
+    first: true,
+    name: 'clientID',
+    label: "Google OAuth ID",
+    required: true,
+    suggestEnvVars: true,
+    value: settings.clientID
+}) }}
+
+{{ forms.autosuggestField({
+    first: true,
+    name: 'clientSecret',
+    label: "Google OAuth Secret",
+    required: true,
+    suggestEnvVars: true,
+    value: settings.clientSecret
+}) }}
