@@ -10,9 +10,9 @@
     // Add Google Auth to /admin/login page
     const login = () => {
         if (location.pathname.match(/\/admin\/login/)) {
-            addMethod('.login-container')
+            addMethod('.login-container', '#login-errors')
                 .then(() => {
-                    console.info('+ google sso');
+                    console.info('+ google oauth');
                 });
 
             // Display error message if any
@@ -29,8 +29,9 @@
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     mutation.addedNodes.forEach((node) => {
-                        if (node.classList && ['modal', 'login-modal'].every(cls => node.classList.contains(cls))) {
-                            addMethod('.login-modal-form')
+                        // C4
+                        if (node.classList && ['modal', 'alert', 'fitted'].every(cls => node.classList.contains(cls))) {
+                            addMethod(node, 'p.error')
                                 .then(() => {
                                     observer.disconnect();
                                 });
@@ -43,17 +44,14 @@
         }
     };
 
-    const addMethod = async (parent = 'document') => {
+    const addMethod = async (parent = 'document', after) => {
         const obj = await getUrl();
         const link = `   <a href="${obj.url}" target="_self" class="btn google-oauth">\n` +
             `      Sign in with` +
             `   </a>`;
 
-        // C5
-        //$(parent).find('.alternative-login-methods').append(link);
-
         // C4
-        $(link).insertAfter('#login-errors');
+        $(link).insertAfter(after);
     };
 
     // Gen Auth URL

@@ -28,20 +28,12 @@ Craft 5
 ## Installation
 
 ```bash
-ddev composer require leowebguy/google-oauth &&
+composer require "leowebguy/google-oauth" -w && php craft plugin/install google-oauth
 ```
-
-On your Control Panel, go to Settings → Plugins → "Google OAuth" → Install
 
 ## Credentials
 
 Gather the necessary info from GoogleOAuth
-
-```.dotenv
-### OAUTH
-GOOGLE_CLIENT_ID=111-xxx.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=AAA-123qwe
-```
 
 Go to https://console.cloud.google.com/auth/clients
 1. Select a Project
@@ -59,4 +51,11 @@ Go to https://console.cloud.google.com/auth/clients
 
 ![Screenshot](resources/console.png)
 
-7. Copy/Save Client ID and Secret (blue arrow)
+7. Copy Client ID and Secret (blue arrow)
+8. Paste into .env OR /admin/settings/plugins/google-oauth
+
+```.dotenv
+### OAUTH
+GOOGLE_CLIENT_ID=111-xxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=AAA-123qwe
+```

@@ -28,16 +28,13 @@ use yii\base\Exception as BaseException;
 
 class Plugin extends BasePlugin
 {
-    public static mixed $plugin;
-
     public bool $hasCpSection = false;
 
     public bool $hasCpSettings = true;
 
-    public function init()
+    public function init(): void
     {
         parent::init();
-        self::$plugin = $this;
 
         if (!$this->isInstalled) {
             return;
