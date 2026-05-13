@@ -2,22 +2,15 @@
 
 {{ forms.lightswitchField({
     first: true,
+    label: 'Enable Google OAuth'|t('app'),
     name: 'active',
-    label: 'OAuth ON/OFF',
-    on: settings.active,
-}) }}
-
-{{ forms.lightswitchField({
-    first: true,
-    name: 'disableLogin',
-    label: 'Disable User/Password Login',
-    on: settings.disableLogin,
+    on: settings.active
 }) }}
 
 {{ forms.autosuggestField({
     first: true,
-    name: 'clientID',
     label: "Google OAuth ID",
+    name: 'clientID',
     required: true,
     suggestEnvVars: true,
     value: settings.clientID
@@ -25,9 +18,17 @@
 
 {{ forms.autosuggestField({
     first: true,
-    name: 'clientSecret',
     label: "Google OAuth Secret",
+    name: 'clientSecret',
     required: true,
     suggestEnvVars: true,
     value: settings.clientSecret
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Disable native login'|t('app'),
+    instructions: 'Disable usr/pw and passkey login methods.<br><small><strong>Make sure Google OAuth is fully setup before enabling this.</strong></small>'|t('app'),
+    first: true,
+    name: 'disableLogin',
+    on: settings.disableLogin
 }) }}

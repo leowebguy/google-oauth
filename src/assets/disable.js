@@ -20,7 +20,7 @@
             const observer1 = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     mutation.addedNodes.forEach((node) => {
-                        if (node.classList && ['modal', 'alert', 'fitted'].every(cls => node.classList.contains(cls))) {
+                        if (node.classList && ['modal', 'login-modal', 'fitted'].every(cls => node.classList.contains(cls))) {
                             removeMethods();
                             observer1.disconnect();
                         }
@@ -33,13 +33,10 @@
     };
 
     const removeMethods = () => {
-        if ($('#login-form').length)
-            $('#login-form').remove();
-
-        if ($('.inputcontainer').length)
-            $('.inputcontainer').remove();
-
-        // $('.login-passkey-btn').remove();
+        const methods = ['.login-form-container', '.login-passkey-btn'];
+        methods.forEach((m) => {
+            $(m).remove();
+        });
     };
 
 }(jQuery));
