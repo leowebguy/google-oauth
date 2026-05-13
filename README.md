@@ -1,11 +1,16 @@
-Google OAuth plugin for Craft
-===
+# Google OAuth plugin for Craft
 
 A minimal Craft plugin to provide Google OAuth login
 
 ---
 
-## Composer | Important
+## Installation
+
+```bash
+composer require "leowebguy/google-oauth" -w && php craft plugin/install google-oauth
+```
+
+## Composer
 
 Craft 4
 
@@ -21,14 +26,6 @@ Craft 5
 "require": {
    "leowebguy/google-oauth": "^2.0",
 }
-```
-
----
-
-## Installation
-
-```bash
-composer require "leowebguy/google-oauth" -w && php craft plugin/install google-oauth
 ```
 
 ## Credentials
@@ -59,3 +56,7 @@ Go to https://console.cloud.google.com/auth/clients
 GOOGLE_CLIENT_ID=111-xxx.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=AAA-123qwe
 ```
+
+![Screenshot](resources/main-login.png)
+
+![Screenshot](resources/timeout-login.png)

@@ -33,13 +33,10 @@
     };
 
     const removeMethods = () => {
-        if ($('#login-form').length)
-            $('#login-form').remove();
-
-        if ($('.inputcontainer').length)
-            $('.inputcontainer').remove();
-
-        // $('.login-passkey-btn').remove();
+        const methods = ['#login-form', '.inputcontainer'];
+        methods.forEach((m) => {
+            $(m).remove();
+        });
     };
 
 }(jQuery));
