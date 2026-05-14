@@ -36,13 +36,14 @@ class AuthService extends Component
 
     /**
      * @param $code
+     * @param $uri
      * @return void
      * @throws Exception
      * @throws ExitException
      * @throws GoogleException
      * @throws InvalidRouteException
      */
-    public function auth($code): void
+    public function auth($code, $uri): void
     {
         $client = self::googleClient();
 
@@ -63,7 +64,7 @@ class AuthService extends Component
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=User does not have an account in this application'));
 
         Craft::$app->getUser()->loginByUserId($user->id);
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('dashboard'));
+        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl($uri ?? 'dashboard'));
         Craft::$app->end();
     }
 
