@@ -10,7 +10,7 @@
     // Add Google Auth to /admin/login page
     const login = () => {
         if (location.pathname.match(/\/admin\/login/)) {
-            addMethod('.login-container', '#login-errors')
+            addMethod('.login-container', '#login-errors', 'dashboard')
                 .then(() => {
                     console.info('+ google oauth');
                 });
@@ -31,7 +31,7 @@
                     mutation.addedNodes.forEach((node) => {
                         // C4
                         if (node.classList && ['modal', 'alert', 'fitted'].every(cls => node.classList.contains(cls))) {
-                            addMethod(node, 'p.error')
+                            addMethod(node, 'p.error', location.pathname.replace(/^\/admin\//g, ''))
                                 .then(() => {
                                     observer.disconnect();
                                 });
@@ -44,8 +44,8 @@
         }
     };
 
-    const addMethod = async (parent = 'document', after) => {
-        const obj = await getUrl();
+    const addMethod = async (parent = 'document', after, uri) => {
+        const obj = await getUrl(uri);
         const link = `   <a href="${obj.url}" target="_self" class="btn google-oauth">\n` +
             `      Sign in with` +
             `   </a>`;
@@ -55,8 +55,8 @@
     };
 
     // Gen Auth URL
-    const getUrl = async () => {
-        const response = await fetch(`/oauth/g/url`);
+    const getUrl = async (uri) => {
+        const response = await fetch(`/oauth/g/url?uri=${uri}`);
         if (!response.ok)
             throw new Error(`HTTP error! status: ${response.status}`);
 

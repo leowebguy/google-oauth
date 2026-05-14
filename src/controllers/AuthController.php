@@ -11,6 +11,7 @@
 namespace leowebguy\googleoauth\controllers;
 
 use Craft;
+use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use Google\Service\Exception as GoogleException;
@@ -31,12 +32,13 @@ class AuthController extends Controller
 
     /**
      * @return Response
-     * @throws Exception
      */
     public function actionGoogleUrl(): Response
     {
-        $response = Craft::$app->getResponse();
+        $params = Craft::$app->request->getQueryParams();
+        Craft::$app->cache->set('google-oauth-uri', $params['uri'] ?? '');
 
+        $response = Craft::$app->getResponse();
         $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
 
         $url = Plugin::getInstance()->oauthService->url();
@@ -62,6 +64,9 @@ class AuthController extends Controller
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=Missing OAuth Code'));
         }
 
-        Plugin::getInstance()->oauthService->auth($params['code']);
+        $uri = Craft::$app->cache->get('google-oauth-uri');
+        Craft::$app->cache->delete('google-oauth-uri');
+
+        Plugin::getInstance()->oauthService->auth($params['code'], $uri);
     }
 }
