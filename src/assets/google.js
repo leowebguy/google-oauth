@@ -18,7 +18,7 @@
             // Display error message if any
             const error = (new URL(location.href)).searchParams.get('error');
             if (error)
-                $('#login-errors').append(`${error}<br>Please contact admin`);
+                $('.login-errors').append(`${error}. Please contact admin`).removeClass('hidden');
 
         }
     };

@@ -63,6 +63,7 @@ class AuthController extends Controller
         if (!$params['code']) {
             Craft::error('Missing OAuth Code', __METHOD__);
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=Missing OAuth Code'));
+            Craft::$app->end();
         }
 
         $uri = Craft::$app->cache->get('google-oauth-uri');

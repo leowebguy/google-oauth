@@ -60,8 +60,16 @@ class AuthService extends Component
         // Now log the user into your application session
         $user = Craft::$app->getUsers()->getUserByUsernameOrEmail($email);
 
-        if (!$user)
+        if (!$user) {
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=User does not have an account in this application'));
+            Craft::$app->end();
+        }
+
+        if (!$user->can('accessCp')) {
+            Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=User does not have privilege to access the Control Panel'));
+            Craft::$app->end();
+        }
+
 
         Craft::$app->getUser()->loginByUserId($user->id);
         Craft::$app->getResponse()->redirect(UrlHelper::cpUrl($uri ?? 'dashboard'));
@@ -79,6 +87,7 @@ class AuthService extends Component
         if (!$settings['clientID'] || !$settings['clientSecret']) {
             Craft::error('Missing Client ID or Secret', __METHOD__);
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=Missing Client ID or Secret'));
+            Craft::$app->end();
         }
 
         $client = new Client();
