@@ -5,7 +5,7 @@
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
  * @copyright  Copyright (c) 2026, leowebguy
- * @license    MIT
+ * @license    Craft
  */
 
 namespace leowebguy\googleoauth\services;
