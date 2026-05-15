@@ -5,7 +5,7 @@
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
  * @copyright  Copyright (c) 2026, leowebguy
- * @license    MIT
+ * @license    Craft
  */
 
 namespace leowebguy\googleoauth\services;
@@ -60,8 +60,15 @@ class AuthService extends Component
         // Now log the user into your application session
         $user = Craft::$app->getUsers()->getUserByUsernameOrEmail($email);
 
-        if (!$user)
+        if (!$user) {
             Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=User does not have an account in this application'));
+            Craft::$app->end();
+        }
+
+        if (!$user->can('accessCp')) {
+            Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('login?error=User does not have privilege to access Control Panel'));
+            Craft::$app->end();
+        }
 
         Craft::$app->getUser()->loginByUserId($user->id);
         Craft::$app->getResponse()->redirect(UrlHelper::cpUrl($uri ?? 'dashboard'));
