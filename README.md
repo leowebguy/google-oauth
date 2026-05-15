@@ -40,7 +40,7 @@ Go to https://console.cloud.google.com/auth/clients
 ![Screenshot](resources/web-app.png)
 
 4. Give it a name
-5. Add "Authorized JavaScript origins" i.e. https://myapp.ddev.site
+5. Add "Authorized JavaScript origins" i.e. https://myapp.ddev.site (Optional)
 6. Add "Authorized redirect URIs" i.e. https://myapp.ddev.site/oauth/g/auth
 
 > The URI has to be "/oauth/g/auth" <br>
@@ -48,8 +48,12 @@ Go to https://console.cloud.google.com/auth/clients
 
 ![Screenshot](resources/console.png)
 
-7. Copy Client ID and Secret (blue arrow)
-8. Paste into .env OR /admin/settings/plugins/google-oauth
+7. Copy Client ID and Secret
+8. Paste/Save /admin/settings/plugins/google-oauth
+
+![Screenshot](resources/settings.png)
+
+9. Add ID/Secret to .env (Optional)
 
 ```.dotenv
 ### OAUTH

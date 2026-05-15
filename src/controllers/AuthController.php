@@ -36,7 +36,8 @@ class AuthController extends Controller
     public function actionGoogleUrl(): Response
     {
         $params = Craft::$app->request->getQueryParams();
-        Craft::$app->cache->set('google-oauth-uri', $params['uri'] ?? '');
+        $uri = StringHelper::trimRight(StringHelper::trim($params['uri']), '/');
+        Craft::$app->cache->set('google-oauth-uri', $uri ?? '');
 
         $response = Craft::$app->getResponse();
         $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
